@@ -1,36 +1,41 @@
 package com.regenswersali.photogallery;
 
+import com.google.gson.annotations.SerializedName;
+
 public class GalleryItem {
-    private String mCaption;
-    private String mID;
-    private String mURL;
+    @SerializedName("title")
+    private String mTitle;
+    @SerializedName("id")
+    private String mId;
+    @SerializedName("url_s")
+    private String mUrl_s;
 
     @Override
     public String toString() {
-        return mCaption;
+        return mTitle;
     }
 
-    public String getCaption() {
-        return mCaption;
+    public String getTitle() {
+        return mTitle;
     }
 
-    public void setCaption(String caption) {
-        mCaption = caption;
+    public void setTitle(String title) {
+        mTitle = title;
     }
 
-    public String getID() {
-        return mID;
+    public String getId() {
+        return mId;
     }
 
-    public void setID(String ID) {
-        mID = ID;
+    public void setId(String id) {
+        mId = id;
     }
 
-    public String getURL() {
-        return mURL;
+    public String getUrl_s() {
+        return mUrl_s;
     }
 
-    public void setURL(String URL) {
-        mURL = URL;
+    public void setUrl_s(String url_s) {
+        mUrl_s = url_s;
     }
 }
