@@ -89,7 +89,7 @@ public class FlickFetchr {
                     .appendQueryParameter("extras", "url_s")
                     .build().toString();
             String jsonString = getUrlString(url);
-            Log.i(TAG, "Received JSON ");
+            Log.i(TAG, "Received JSON " + page);
             JSONObject jsonBody = new JSONObject(jsonString);
             parseItems(items, jsonBody);
         } catch (IOException ioe) {
