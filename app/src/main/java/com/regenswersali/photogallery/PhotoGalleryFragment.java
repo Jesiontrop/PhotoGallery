@@ -38,8 +38,12 @@ public class PhotoGalleryFragment extends Fragment {
         setRetainInstance(true);
         new FetchItemsTask().execute(1);
 
+        int maxMemory = (int) Runtime.getRuntime().maxMemory() / 1024;
+        int cacheSize = maxMemory/8;
+        IconCache IconCache = new IconCache(cacheSize);
+
         Handler responseHandler = new Handler();
-        mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
+        mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler, IconCache);
         mThumbnailDownloader.setThumbnailDownloadListener(
                 new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
                     @Override
@@ -60,7 +64,6 @@ public class PhotoGalleryFragment extends Fragment {
         mPhotoRecyclerView = v.findViewById(R.id.photo_recycler_view);
         mPhotoRecyclerView.setLayoutManager(new GridLayoutManager
                 (getActivity(), 3));
-//        mPhotoRecyclerView.setItemViewCacheSize(36);
         setupAdapter();
         final GridLayoutManager gridLayoutManager =
                 (GridLayoutManager) mPhotoRecyclerView.getLayoutManager();
@@ -161,7 +164,7 @@ public class PhotoGalleryFragment extends Fragment {
 
         @Override
         protected List<GalleryItem> doInBackground(Integer... integers) {
-            return new FlickFetchr().fetchItems(getString(R.string.api_key), integers.toString());
+            return new FlickFetchr().fetchItems(getString(R.string.api_key), integers[0].toString());
         }
 
         @Override

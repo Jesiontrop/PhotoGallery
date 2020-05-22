@@ -21,6 +21,7 @@ class ThumbnailDownloader<T> extends HandlerThread {
     private ConcurrentMap<T, String> mRequestMap = new ConcurrentHashMap<>();
     private Handler mResponseHandler;
     private ThumbnailDownloadListener<T> mThumbnailDownloadListener;
+    private IconCache mIconCache;
 
     public interface ThumbnailDownloadListener<T> {
         void onThumbnailDownloaded(T target, Bitmap thumbnail);
@@ -30,9 +31,10 @@ class ThumbnailDownloader<T> extends HandlerThread {
         mThumbnailDownloadListener = listener;
     }
 
-    public ThumbnailDownloader(Handler responseHandler) {
+    public ThumbnailDownloader(Handler responseHandler, IconCache iconCache) {
         super(TAG);
         mResponseHandler = responseHandler;
+        mIconCache = iconCache;
     }
 
     @Override
@@ -75,17 +77,22 @@ class ThumbnailDownloader<T> extends HandlerThread {
     }
 
     private void handleRequest(final T target) {
+        final String url = mRequestMap.get(target);
+        final Bitmap bitmap;
         try {
-            final String url = mRequestMap.get(target);
             if (url == null) {
                 return;
             }
-
-            byte[] bitmapBytes = new FlickFetchr().getUrlBytes(url);
-            final Bitmap bitmap = BitmapFactory
-                    .decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
-            Log.i(TAG, "Bitmap created");
-
+            if(mIconCache.getBitmapFromMemory(url) == null) {
+                byte[] bitmapBytes = new FlickFetchr().getUrlBytes(url);
+                bitmap = BitmapFactory
+                        .decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
+                mIconCache.setBitmapToMemory(url, bitmap);
+                Log.i(TAG, "Bitmap created");
+            } else {
+                bitmap = mIconCache.getBitmapFromMemory(url);
+                Log.i(TAG, "Take Bitmap from Cash");
+            }
             mResponseHandler.post(new Runnable() {
                 @Override
                 public void run() {
