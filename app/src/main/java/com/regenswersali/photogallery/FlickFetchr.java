@@ -20,6 +20,23 @@ import java.util.List;
 
 public class FlickFetchr {
     private static final String TAG = "FlickFetchr";
+    private static final String FETCH_RECENTS_METHOD = "flickr.photos.getRecent";
+    private static final String SEARCH_METHOD = "flickr.photos.search";
+    private static  Uri ENDPOINT;
+
+    public FlickFetchr() { }
+
+    public FlickFetchr(String API_KEY) {
+        ENDPOINT = Uri
+                .parse("https://api.flickr.com/services/rest/")
+                .buildUpon()
+                .appendQueryParameter("api_key", API_KEY)
+                .appendQueryParameter("format", "json")
+                .appendQueryParameter("nojsoncallback", "1")
+                .appendQueryParameter("extras", "url_s")
+                .build();
+    }
+
 
     public byte[] getUrlBytes(String urlSpec) throws IOException {
         URL url = new URL(urlSpec);
@@ -47,58 +64,41 @@ public class FlickFetchr {
         return new String(getUrlBytes(urlSpec));
     }
 
-    public List<GalleryItem> fetchItems(String API_KEY) {
+    public List<GalleryItem> fetchRecentPhotos(String page) {
+        String url = buildUrl(FETCH_RECENTS_METHOD, null, page);
+        return downloadGalleryItem(url);
+    }
 
+    public List<GalleryItem> searchPhotos(String page, String query) {
+        String url = buildUrl(SEARCH_METHOD, page, query);
+        return downloadGalleryItem(url);
+    }
+
+    private List<GalleryItem> downloadGalleryItem(String url) {
         List<GalleryItem> items = new ArrayList<>();
-
         try {
-            String url = Uri.parse("https://api.flickr.com/services/rest/")
-                    .buildUpon()
-                    .appendQueryParameter("method", "flickr.photos.getRecent")
-                    .appendQueryParameter("api_key", API_KEY)
-                    .appendQueryParameter("format", "json")
-                    .appendQueryParameter("nojsoncallback", "1")
-                    .appendQueryParameter("extras", "url_s")
-                    .build().toString();
             String jsonString = getUrlString(url);
-            Log.i(TAG, "Received JSON ");
+            Log.i(TAG, "Received JSON: " + jsonString);
             JSONObject jsonBody = new JSONObject(jsonString);
             parseItems(items, jsonBody);
         } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items", ioe);
         } catch (JSONException je) {
-            Log.e(TAG, "Failed to parse JSON", je);
+            Log.e(TAG, "Failed to parse Json", je);
         }
 
         return items;
     }
 
-    public List<GalleryItem> fetchItems(String API_KEY, String page) {
-
-        List<GalleryItem> items = new ArrayList<>();
-
-        try {
-            String url = Uri.parse("https://api.flickr.com/services/rest/")
-                    .buildUpon()
-                    .appendQueryParameter("method", "flickr.photos.getRecent")
-                    .appendQueryParameter("api_key", API_KEY)
-                    .appendQueryParameter("per_page", "99")
-                    .appendQueryParameter("page", page)
-                    .appendQueryParameter("format", "json")
-                    .appendQueryParameter("nojsoncallback", "1")
-                    .appendQueryParameter("extras", "url_s")
-                    .build().toString();
-            String jsonString = getUrlString(url);
-            Log.i(TAG, "Received JSON " + page);
-            JSONObject jsonBody = new JSONObject(jsonString);
-            parseItems(items, jsonBody);
-        } catch (IOException ioe) {
-            Log.e(TAG, "Failed to fetch items", ioe);
-        } catch (JSONException je) {
-            Log.e(TAG, "Failed to parse JSON", je);
+    private String buildUrl(String method, String page, String query) {
+        Uri.Builder uriBuilder = ENDPOINT.buildUpon()
+                .appendQueryParameter("method", method);
+        if (method.equals(SEARCH_METHOD)) {
+            uriBuilder.appendQueryParameter("text", query);
         }
+        uriBuilder.appendQueryParameter("page", page == null ? "1" : page);
 
-        return items;
+        return uriBuilder.build().toString();
     }
 
     private void parseItems(List<GalleryItem> items, JSONObject jsonBody)
