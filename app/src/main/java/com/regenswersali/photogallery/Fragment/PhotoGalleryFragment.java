@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery;
+package com.regenswersali.photogallery.Fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -21,6 +21,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.regenswersali.photogallery.Cache.IconCache;
+import com.regenswersali.photogallery.Data.GalleryItem;
+import com.regenswersali.photogallery.Flickr.FlickFetchr;
+import com.regenswersali.photogallery.HandlerThread.ThumbnailDownloader;
+import com.regenswersali.photogallery.Preference.QueryPreferences;
+import com.regenswersali.photogallery.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +76,7 @@ public class PhotoGalleryFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
         super.onCreateOptionsMenu(menu, menuInflater);
         menuInflater.inflate(R.menu.fragment_photo_gallery, menu);
 
@@ -142,7 +149,7 @@ public class PhotoGalleryFragment extends Fragment {
             int lastVisibleItem;
             private boolean loading = true;
 
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 totalItemCount = gridLayoutManager.getItemCount();
                 lastVisibleItem = gridLayoutManager.findLastVisibleItemPosition();

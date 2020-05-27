@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery;
+package com.regenswersali.photogallery.HandlerThread;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,11 +8,14 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
+import com.regenswersali.photogallery.Cache.IconCache;
+import com.regenswersali.photogallery.Flickr.FlickFetchr;
+
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-class ThumbnailDownloader<T> extends HandlerThread {
+public class ThumbnailDownloader<T> extends HandlerThread {
     private static final String TAG = "ThumbnailDownloader";
     private static final int MESSAGE_DOWNLOAD = 0;
 

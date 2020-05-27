@@ -1,10 +1,11 @@
-package com.regenswersali.photogallery;
+package com.regenswersali.photogallery.Flickr;
 
 import android.net.Uri;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.regenswersali.photogallery.Data.GalleryItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;

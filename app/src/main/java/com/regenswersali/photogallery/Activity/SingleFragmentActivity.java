@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery;
+package com.regenswersali.photogallery.Activity;
 
 import android.os.Bundle;
 
@@ -6,6 +6,8 @@ import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.regenswersali.photogallery.R;
 
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {

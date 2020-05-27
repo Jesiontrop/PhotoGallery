@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery;
+package com.regenswersali.photogallery.Preference;
 
 import android.content.Context;
 import android.preference.PreferenceManager;

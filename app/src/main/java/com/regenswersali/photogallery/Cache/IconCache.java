@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery;
+package com.regenswersali.photogallery.Cache;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
