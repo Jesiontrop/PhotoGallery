@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.preference:preference:1.1.1'
 }

@@ -1,5 +1,6 @@
 package com.regenswersali.photogallery.feature.search;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -28,6 +29,7 @@ import com.regenswersali.photogallery.base.repo.search.FlickFetchr;
 import com.regenswersali.photogallery.base.utils.handlerthread.ThumbnailDownloader;
 import com.regenswersali.photogallery.base.repo.search.QueryPreferences;
 import com.regenswersali.photogallery.R;
+import com.regenswersali.photogallery.base.repo.search.PollService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +110,13 @@ public class PhotoGalleryFragment extends Fragment {
 
             }
         });
+
+        MenuItem toggleItem = menu.findItem(R.id.menu_item_toggle_polling);
+        if (PollService.isServiceAlarmOn(getActivity())) {
+            toggleItem.setTitle(R.string.stop_polling);
+        } else {
+            toggleItem.setTitle(R.string.start_polling);
+        }
     }
 
     @Override
@@ -117,6 +126,11 @@ public class PhotoGalleryFragment extends Fragment {
                 QueryPreferences.setStoredQuery(getActivity(), null);
                 restartRecyclerView();
                 updateItems();
+                return true;
+            case R.id.menu_item_toggle_polling:
+                boolean shouldStartAlarm = !PollService.isServiceAlarmOn(getActivity());
+                PollService.setServiceAlarm(getActivity(), shouldStartAlarm);
+                getActivity().invalidateOptionsMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
