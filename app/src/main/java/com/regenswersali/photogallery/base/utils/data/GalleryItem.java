@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.Data;
+package com.regenswersali.photogallery.base.utils.data;
 
 import com.google.gson.annotations.SerializedName;
 

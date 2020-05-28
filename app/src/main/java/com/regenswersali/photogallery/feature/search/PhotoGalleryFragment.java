@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.Fragment;
+package com.regenswersali.photogallery.feature.search;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,11 +22,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.regenswersali.photogallery.Cache.IconCache;
-import com.regenswersali.photogallery.Data.GalleryItem;
-import com.regenswersali.photogallery.Flickr.FlickFetchr;
-import com.regenswersali.photogallery.HandlerThread.ThumbnailDownloader;
-import com.regenswersali.photogallery.Preference.QueryPreferences;
+import com.regenswersali.photogallery.base.utils.cache.IconCache;
+import com.regenswersali.photogallery.base.utils.data.GalleryItem;
+import com.regenswersali.photogallery.base.repo.search.FlickFetchr;
+import com.regenswersali.photogallery.base.utils.handlerthread.ThumbnailDownloader;
+import com.regenswersali.photogallery.base.repo.search.QueryPreferences;
 import com.regenswersali.photogallery.R;
 
 import java.util.ArrayList;

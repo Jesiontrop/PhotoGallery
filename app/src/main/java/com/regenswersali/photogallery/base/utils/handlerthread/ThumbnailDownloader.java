@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.HandlerThread;
+package com.regenswersali.photogallery.base.utils.handlerthread;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,8 +8,8 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
-import com.regenswersali.photogallery.Cache.IconCache;
-import com.regenswersali.photogallery.Flickr.FlickFetchr;
+import com.regenswersali.photogallery.base.utils.cache.IconCache;
+import com.regenswersali.photogallery.base.repo.search.FlickFetchr;
 
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;

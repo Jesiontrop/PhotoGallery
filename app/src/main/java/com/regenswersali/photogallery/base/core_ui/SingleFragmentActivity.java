@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.Activity;
+package com.regenswersali.photogallery.base.core_ui;
 
 import android.os.Bundle;
 
