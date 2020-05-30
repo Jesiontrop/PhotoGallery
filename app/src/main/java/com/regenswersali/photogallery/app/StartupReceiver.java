@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.regenswersali.photogallery.base.repo.search.PollService;
-import com.regenswersali.photogallery.base.repo.search.QueryPreferences;
+import com.regenswersali.photogallery.base.repo.gallery.PollService;
+import com.regenswersali.photogallery.base.repo.gallery.QueryPreferences;
 
 public class StartupReceiver extends BroadcastReceiver {
     private static final String TAG = "StartupReceiver";

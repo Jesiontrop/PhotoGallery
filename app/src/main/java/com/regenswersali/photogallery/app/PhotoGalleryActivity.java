@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 
-import com.regenswersali.photogallery.feature.search.PhotoGalleryFragment;
+import com.regenswersali.photogallery.feature.gallery.PhotoGalleryFragment;
 import com.regenswersali.photogallery.base.core_ui.SingleFragmentActivity;
 
 public class PhotoGalleryActivity extends SingleFragmentActivity {

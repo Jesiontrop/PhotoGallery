@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.base.repo.search;
+package com.regenswersali.photogallery.base.repo.gallery;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -19,6 +19,7 @@ import androidx.core.app.NotificationCompat;
 import com.regenswersali.photogallery.R;
 import com.regenswersali.photogallery.base.utils.data.GalleryItem;
 import com.regenswersali.photogallery.app.PhotoGalleryActivity;
+import com.regenswersali.photogallery.base.utils.flickr.FlickFetchr;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

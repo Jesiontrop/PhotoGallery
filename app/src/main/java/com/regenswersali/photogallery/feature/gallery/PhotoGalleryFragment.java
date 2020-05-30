@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.feature.search;
+package com.regenswersali.photogallery.feature.gallery;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,18 +19,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.regenswersali.photogallery.base.core_ui.VisibleFragment;
 import com.regenswersali.photogallery.base.utils.cache.IconCache;
 import com.regenswersali.photogallery.base.utils.data.GalleryItem;
-import com.regenswersali.photogallery.base.repo.search.FlickFetchr;
+import com.regenswersali.photogallery.base.utils.flickr.FlickFetchr;
 import com.regenswersali.photogallery.base.utils.handlerthread.ThumbnailDownloader;
-import com.regenswersali.photogallery.base.repo.search.QueryPreferences;
+import com.regenswersali.photogallery.base.repo.gallery.QueryPreferences;
 import com.regenswersali.photogallery.R;
-import com.regenswersali.photogallery.base.repo.search.PollService;
+import com.regenswersali.photogallery.base.repo.gallery.PollService;
+import com.regenswersali.photogallery.feature.page.PhotoPageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -213,17 +213,32 @@ public class PhotoGalleryFragment extends VisibleFragment {
         setupAdapter();
     }
 
-    private class PhotoHolder extends RecyclerView.ViewHolder {
+    private class PhotoHolder extends RecyclerView.ViewHolder
+                            implements View.OnClickListener {
         private ImageView mItemImageView;
+        private GalleryItem mGalleryItem;
 
         public PhotoHolder(@NonNull View itemView) {
             super(itemView);
 
             mItemImageView = (ImageView) itemView.findViewById(R.id.item_image_view);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bindDrawable(Drawable drawable) {
             mItemImageView.setImageDrawable(drawable);
+        }
+
+        public void bindGalleryItem(GalleryItem galleryItem) {
+            mGalleryItem = galleryItem;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent i = PhotoPageActivity
+                    .newIntent(getActivity(), mGalleryItem.getPhotoPageUri());
+            startActivity(i);
         }
     }
 
@@ -247,6 +262,7 @@ public class PhotoGalleryFragment extends VisibleFragment {
         @Override
         public void onBindViewHolder(@NonNull PhotoHolder holder, int position) {
             GalleryItem galleryItem = mGalleryItems.get(position);
+            holder.bindGalleryItem(galleryItem);
             Drawable placeholder = getResources().getDrawable(R.mipmap.white_foreground);
             holder.bindDrawable(placeholder);
             mThumbnailDownloader.queueThumbnail(holder, galleryItem.getUrl_s());

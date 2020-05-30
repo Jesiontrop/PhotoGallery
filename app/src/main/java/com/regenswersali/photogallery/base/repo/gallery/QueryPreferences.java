@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.base.repo.search;
+package com.regenswersali.photogallery.base.repo.gallery;
 
 import android.content.Context;
 import androidx.preference.PreferenceManager;

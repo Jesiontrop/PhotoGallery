@@ -9,7 +9,7 @@ import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 
-import com.regenswersali.photogallery.base.repo.search.PollService;
+import com.regenswersali.photogallery.base.repo.gallery.PollService;
 
 public abstract class VisibleFragment extends Fragment {
     private static final String TAG = "VisibleFragment";

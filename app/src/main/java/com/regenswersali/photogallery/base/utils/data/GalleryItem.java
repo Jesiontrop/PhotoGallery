@@ -1,5 +1,7 @@
 package com.regenswersali.photogallery.base.utils.data;
 
+import android.net.Uri;
+
 import com.google.gson.annotations.SerializedName;
 
 public class GalleryItem {
@@ -9,6 +11,8 @@ public class GalleryItem {
     private String mId;
     @SerializedName("url_s")
     private String mUrl_s;
+    @SerializedName("owner")
+    private String mOwner;
 
     @Override
     public String toString() {
@@ -37,5 +41,21 @@ public class GalleryItem {
 
     public void setUrl_s(String url_s) {
         mUrl_s = url_s;
+    }
+
+    public String getOwner() {
+        return mOwner;
+    }
+
+    public void setOwner(String owner) {
+        mOwner = owner;
+    }
+
+    public Uri getPhotoPageUri() {
+        return Uri.parse("http://www.flickr.com/photos/")
+                .buildUpon()
+                .appendPath(mOwner)
+                .appendPath(mId)
+                .build();
     }
 }

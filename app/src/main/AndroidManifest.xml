@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".app.PhotoGalleryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,19 +25,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".base.repo.search.PollService" />
+
+        <activity android:name=".feature.page.PhotoPageActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <service android:name=".base.repo.gallery.PollService" />
 
         <receiver android:name=".app.StartupReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".base.repo.search.NotificationReceiver"
+
+        <receiver android:name=".base.repo.gallery.NotificationReceiver"
             android:exported="false">
             <intent-filter android:priority="-999">
                 <action android:name="com.regenswersali.photogallery.SHOW_NOTIFICATION"/>
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

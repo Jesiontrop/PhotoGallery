@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.base.repo.search;
+package com.regenswersali.photogallery.base.utils.flickr;
 
 import android.net.Uri;
 import android.util.Log;
@@ -66,7 +66,7 @@ public class FlickFetchr {
     }
 
     public List<GalleryItem> fetchRecentPhotos(String page) {
-        String url = buildUrl(FETCH_RECENTS_METHOD, null, page);
+        String url = buildUrl(FETCH_RECENTS_METHOD, page, null );
         return downloadGalleryItem(url);
     }
 
