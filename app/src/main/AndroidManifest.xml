@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.regenswersali.photogallery">
 
+    <permission android:name="com.regenswersali.photogallery.PRIVATE"
+        android:protectionLevel="signature"/>
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="com.regenswersali.photogallery.PRIVATE"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.search.PhotoGalleryActivity">
+        <activity android:name=".app.PhotoGalleryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +25,18 @@
             </intent-filter>
         </activity>
         <service android:name=".base.repo.search.PollService" />
+
+        <receiver android:name=".app.StartupReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".base.repo.search.NotificationReceiver"
+            android:exported="false">
+            <intent-filter android:priority="-999">
+                <action android:name="com.regenswersali.photogallery.SHOW_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

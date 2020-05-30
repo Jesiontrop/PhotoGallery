@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.regenswersali.photogallery.base.core_ui.VisibleFragment;
 import com.regenswersali.photogallery.base.utils.cache.IconCache;
 import com.regenswersali.photogallery.base.utils.data.GalleryItem;
 import com.regenswersali.photogallery.base.repo.search.FlickFetchr;
@@ -34,7 +35,7 @@ import com.regenswersali.photogallery.base.repo.search.PollService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoGalleryFragment extends Fragment {
+public class PhotoGalleryFragment extends VisibleFragment {
 
     private static final String TAG = "PhotoGalleryFragment";
     private RecyclerView mPhotoRecyclerView;

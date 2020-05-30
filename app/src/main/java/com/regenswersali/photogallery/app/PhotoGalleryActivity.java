@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.feature.search;
+package com.regenswersali.photogallery.app;
 
 import android.content.Context;
 import android.content.Intent;
