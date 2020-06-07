@@ -19,7 +19,7 @@ import androidx.core.app.NotificationCompat;
 import com.regenswersali.photogallery.R;
 import com.regenswersali.photogallery.base.utils.data.GalleryItem;
 import com.regenswersali.photogallery.app.PhotoGalleryActivity;
-import com.regenswersali.photogallery.base.utils.flickr.FlickFetchr;
+import com.regenswersali.photogallery.base.utils.fetch.FlickFetchr;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

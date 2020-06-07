@@ -1,4 +1,4 @@
-package com.regenswersali.photogallery.base.utils.flickr;
+package com.regenswersali.photogallery.base.utils.fetch;
 
 import android.net.Uri;
 import android.util.Log;

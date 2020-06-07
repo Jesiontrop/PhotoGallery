@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.regenswersali.photogallery.base.core_ui.VisibleFragment;
 import com.regenswersali.photogallery.base.utils.cache.IconCache;
 import com.regenswersali.photogallery.base.utils.data.GalleryItem;
-import com.regenswersali.photogallery.base.utils.flickr.FlickFetchr;
+import com.regenswersali.photogallery.base.utils.fetch.FlickFetchr;
 import com.regenswersali.photogallery.base.utils.handlerthread.ThumbnailDownloader;
 import com.regenswersali.photogallery.base.repo.gallery.QueryPreferences;
 import com.regenswersali.photogallery.R;
