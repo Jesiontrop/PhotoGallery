@@ -11,3 +11,5 @@ This is a client for the Flickr photo sharing site that will upload and display 
 ### Technology stack
 - GSON
 - RecyclerView
+- Service
+- Broadcost Service
